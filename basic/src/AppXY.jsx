@@ -19,7 +19,7 @@ export default function AppXY() {
       {/* <XY className="pointer" x={x} y={y} /> */}
       <div
         className="pointer"
-        style={{ transform: `translate(${position.x}px), ${position.y}px` }}
+        style={{ transform: `translate(${position.x}px, ${position.y}px)` }}
       />
     </div>
   );
