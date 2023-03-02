@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useImmer } from "use-immer";
 
-export default function AppMentorsImmer() {
+export default function AppMentors() {
   const [person, updatePerson] = useImmer(initialPerson);
   const handleUpdate = () => {
     const prev = prompt(`누구의 이름을 바꾸고 싶은가요?`);
@@ -14,19 +14,23 @@ export default function AppMentorsImmer() {
   const handleAdd = () => {
     const name = prompt(`멘토의 이름은?`);
     const title = prompt(`멘토의 직함은?`);
-    updatePerson((person) => person.mentors.push({ name, title }));
+    updatePerson((person) => {
+      person.mentors.push({ name, title });
+    });
   };
   const handleDelete = () => {
     const name = prompt(`누구를 삭제하고 싶은가요?`);
     updatePerson((person) => {
       const index = person.mentors.findIndex((m) => m.name === name);
+      if (index < 0) return;
       person.mentors.splice(index, 1);
     });
   };
+
   return (
     <div>
       <h1>
-        {person.name}는 {person.title}
+        {person.name}은 {person.title}
       </h1>
       <p>{person.name}의 멘토는:</p>
       <ul>
