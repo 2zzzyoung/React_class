@@ -1,31 +1,11 @@
 import React from "react";
-import { useEffect } from "react";
 import { useState } from "react";
+import useProducts from "../../hooks/use-products";
 
 export default function Products() {
-  const [products, setProducts] = useState([]);
   const [checked, setChecked] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+  const [loading, error, products] = useProducts({ salesOnly: checked });
   const handleChange = () => setChecked((prev) => !prev);
-
-  useEffect(() => {
-    setLoading(true);
-    setError(undefined);
-    fetch(`data/${checked ? "sale_" : ""}d.json`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("success");
-        setProducts(data);
-        setLoading(false);
-      })
-      .catch((err) => setError("에러가 발생했음!"))
-      .finally(() => setLoading(false));
-
-    return () => {
-      console.log("clean");
-    };
-  }, [checked]);
 
   if (loading) return <p>Loading...</p>;
 
