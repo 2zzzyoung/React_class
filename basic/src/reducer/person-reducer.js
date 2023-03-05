@@ -21,7 +21,7 @@ export default function personReducer(person, action) {
         mentors: [...person.mentors, { name, title }],
       };
     }
-    case "delete": {
+    case "deleted": {
       return {
         ...person,
         mentors: person.mentors.filter((mentor) => mentor.name !== action.name),
