@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import MainProducts from "./components/MainProducts";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+  <QueryClientProvider client={QueryClient}>
+    <MainProducts />
+  </QueryClientProvider>
   // <React.StrictMode>
-  <MainProducts />
   // </React.StrictMode>
 );
 
