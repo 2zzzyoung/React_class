@@ -7,12 +7,18 @@ export default function Products() {
     isLoading,
     error,
     data: products,
-  } = useQuery(["products", checked], async () => {
-    console.log("fetching");
-    return fetch(`data/${checked ? "sale_" : ""}products.json`).then((res) =>
-      res.json()
-    );
-  });
+  } = useQuery(
+    ["products", checked],
+    async () => {
+      console.log("fetching", checked);
+      return fetch(`data/${checked ? "sale_" : ""}products.json`).then((res) =>
+        res.json()
+      );
+    },
+    {
+      staleTime: 1000 * 60 * 5,
+    }
+  );
   const handleChange = () => setChecked((prev) => !prev);
 
   if (isLoading) return <p>Loading...</p>;
